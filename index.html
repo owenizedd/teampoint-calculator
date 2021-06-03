@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Calculator</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body style="margin: 10px 15px">
+    <div class="teams">
+        <div class="tim1-container">
+            <div class="form-group">
+                <label for="tim1-name">Masukkan Nama Tim1</label>
+                <input type="text" class="form-control" id="tim1-name">
+            </div>
+            <div class="form-group">
+                <label for="tim1-score">Masukkan poin Tim1, dipisah koma (misalnya: 10,2,3)</label>
+                <input type="text" class="form-control score-field" name=""  id="tim1-score">
+            </div>
+        </div>
+        <hr>
+        <div id='new-team'></div>
+    </div>
+    <button type="button" class="btn btn-info" id="add-team">Tambah tim</button>
+
+    <button type="button" class="btn btn-primary" id="calculate">Hitung dan dapatkan peringkat</button>
+    <h4 id="header-scoreboard" style="display: none">Juara:</h4>
+    <ol id="scoreboard">
+
+    </ol>
+</body>
+<script>
+    let totalTeam = 1;
+    document.querySelector('#add-team').onclick = function(){
+        ++totalTeam;
+        let teamHTML =document.querySelector('.tim1-container').innerHTML;
+        teamHTML = teamHTML.replaceAll('tim1', 'tim' + totalTeam);
+        teamHTML = teamHTML.replaceAll('Tim1', 'Tim' + totalTeam);
+        document.querySelector('#new-team').outerHTML = teamHTML + '<hr><div id="new-team"></div>';
+    }
+    document.querySelector('#calculate').onclick = function(){
+        let data = [];
+        Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput) => {
+            let sum = scoreInput.value.split(",").map(val => +val).reduce((a,b) => a + b);
+            let name = document.querySelector('#' + scoreInput.id.replace('score','name')).value;
+            data.push({ name, sum });
+            console.log(sum, name)
+        })
+        ranks = data.sort((a,b) => a.sum > b.sum ? 1 : -1).reverse().map(team => `<li>${team.name} - ${team.sum}</li>`);
+        document.querySelector('#scoreboard').innerHTML = ranks;
+        document.querySelector('#header-scoreboard').style.display='block';
+        
+    }
+</script>
+</html>
