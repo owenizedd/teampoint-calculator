@@ -7,6 +7,24 @@
     <title>Team Calculator</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+    .float-info{
+        position: fixed;
+        right: 10px;
+        top: 5px;
+        background: #444;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        opacity: 0.9;
+        transition: 300ms all;
+    }
+    .float-info ul{
+        margin: 0;
+        padding: 0;
+        transition: 300ms all;
+    }
+</style>
 </head>
 <body style="margin: 10px 15px">
     <div class="teams">
@@ -30,6 +48,25 @@
     <ol id="scoreboard">
 
     </ol>
+    <div class="float-info" style='max-height: 350px'>
+        <p>Nilai peringkat ke poin</p>
+        <ul style='overflow: hidden'>
+            <li>Peringkat 1: 12 Poin</li>
+            <li>Peringkat 1: 9 Poin</li>
+            <li>Peringkat 2: 8 Poin</li>
+            <li>Peringkat 3: 7 Poin</li>
+            <li>Peringkat 4: 6 Poin</li>
+            <li>Peringkat 5: 5 Poin</li>
+            <li>Peringkat 6: 4 Poin</li>
+            <li>Peringkat 7: 3 Poin</li>
+            <li>Peringkat 8: 2 Poin</li>
+            <li>Peringkat 9: 1 Poin</li>
+            <li>Peringkat 10: 0 Poin</li>
+            <li>Peringkat 11: 0 Poin</li>
+            <br>
+        </ul>
+        <button class="btn btn-warning" id="toggle-float">Tutup/Buka</button>
+    </div>
 </body>
 <script>
     let totalTeam = 1;
@@ -52,6 +89,19 @@
         document.querySelector('#scoreboard').innerHTML = ranks;
         document.querySelector('#header-scoreboard').style.display='block';
         
+    }
+    document.querySelector('#toggle-float').onclick= function(){
+        const floatInfo = document.querySelector('.float-info');
+        const ulList = floatInfo.querySelector('ul');
+        const curHeight = floatInfo.style.maxHeight;
+        if (curHeight === '350px'){
+            floatInfo.style.maxHeight = '0px'
+            ulList.style.maxHeight = '0px';
+        }
+        else {
+            floatInfo.style.maxHeight = '350px'
+            ulList.style.maxHeight = '350px'
+        }
     }
 </script>
 </html>
