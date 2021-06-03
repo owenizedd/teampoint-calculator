@@ -48,7 +48,7 @@
             data.push({ name, sum });
             console.log(sum, name)
         })
-        ranks = data.sort((a,b) => a.sum > b.sum ? 1 : -1).reverse().map(team => `<li>${team.name} - ${team.sum}</li>`);
+        ranks = data.sort((a,b) => a.sum > b.sum ? 1 : -1).reverse().map(team => `<li>${team.name} - ${team.sum}</li>`).join("");
         document.querySelector('#scoreboard').innerHTML = ranks;
         document.querySelector('#header-scoreboard').style.display='block';
         
