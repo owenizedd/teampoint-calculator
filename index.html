@@ -46,6 +46,8 @@
         <div id='new-team'></div>
     </div>
     <button type="button" class="btn btn-info" id="add-team">Tambah tim</button>
+    <button type="button" class="btn btn-info" id="clear-storage-btn">Tambah tim</button>
+
 
     <button type="button" class="btn btn-primary" id="calculate">Hitung dan dapatkan peringkat</button>
     <h4 id="header-scoreboard" style="display: none">Juara:</h4>
@@ -80,6 +82,7 @@
         teamHTML = teamHTML.replaceAll('tim1', 'tim' + totalTeam);
         teamHTML = teamHTML.replaceAll('Tim1', 'Tim' + totalTeam);
         document.querySelector('#new-team').outerHTML = teamHTML + '<hr><div id="new-team"></div>';
+        saveDataToStorage();
     }
     document.querySelector('#calculate').onclick = function(){
         let data = [];
@@ -107,5 +110,38 @@
             ulList.style.maxHeight = '350px'
         }
     }
+
+    document.querySelector('#clear-storage-btn').onclick = function () {
+        localStorage.clear();
+    }
+
+    let data = []
+    function loadDataFromStorage(){
+        const scores = JSON.parse(localStorage.getItem('scores'));
+        if (Array.isArray(scores)){
+            data = scores;
+            for(let i = 0; i< scores.length - 1; i++){
+                document.querySelector('#add-team').click();
+            }
+            Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput, index) => {
+                scoreInput.value = scores[index].sum;
+                let name = document.querySelector('#' + scoreInput.id.replace('score','name')).value = scores[index].name;
+            })
+        }
+    }
+    function saveDataToStorage(){
+        let length = Array.from(document.querySelectorAll('.score-field')).length;
+        data.length = length;
+        Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput, index) => {
+            scoreInput.onchange = function(){
+                let sum = this.value;
+                let name = document.querySelector('#' + this.id.replace('score','name')).value;
+                data[index] = { name, sum };
+                localStorage.setItem('scores', JSON.stringify(data));
+            }
+        })
+    }
+    this.saveDataToStorage();
+    this.loadDataFromStorage();
 </script>
 </html>
