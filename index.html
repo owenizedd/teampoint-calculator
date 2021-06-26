@@ -133,7 +133,7 @@
         let length = Array.from(document.querySelectorAll('.score-field')).length;
         data.length = length;
         Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput, index) => {
-            scoreInput.onchange = function(){
+            scoreInput.oninput = function(){
                 let sum = this.value;
                 let name = document.querySelector('#' + this.id.replace('score','name')).value;
                 data[index] = { name, sum };
