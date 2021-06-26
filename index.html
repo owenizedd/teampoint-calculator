@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Calculator</title>
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
     .float-info{
         position: fixed;
@@ -27,51 +27,85 @@
 </style>
 </head>
 <body style="margin: 10px 15px">
-    <div class="jumbotron">
-        <h3>Kalkulator Hitung Peringkat Turnamen FreeFire</h3>
-    </div>
-    <hr>
-    <div class="teams">
-        <div class="tim1-container">
-            <div class="form-group">
-                <label for="tim1-name">Masukkan Nama Tim1</label>
-                <input type="text" class="form-control" id="tim1-name">
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">Tentang website</h4>
+                <p class="text-muted">Made by Owen. </p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="http://www.instagram.com/owenizedd" class="text-white">Follow on Instagram</a></li>
+                </ul>
+              </div>
             </div>
-            <div class="form-group">
-                <label for="tim1-score">Masukkan poin Tim1, dipisah koma (misalnya: 10,2,3)</label>
-                <input type="text" class="form-control score-field" name=""  id="tim1-score">
-            </div>
+          </div>
         </div>
+        <div class="navbar navbar-dark bg-dark box-shadow">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center" >
+                <svg style="fill: white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 24h6c2.762 0 5-2.239 5-5v-6h-11v11zm3-7h5v1h-5v-1zm0 2h5v1h-5v-1zm-16 0c0 2.761 2.239 5 5 5h6v-11h-11v6zm3-1h2v-2h1v2h2v1h-2v2h-1v-2h-2v-1zm16-18h-6v11h11v-6c0-2.761-2.238-5-5-5zm-.5 3c.276 0 .5.224.5.5s-.224.5-.5.5-.5-.224-.5-.5.224-.5.5-.5zm0 5c-.276 0-.5-.224-.5-.5s.224-.5.5-.5.5.224.5.5-.224.5-.5.5zm2.5-2h-5v-1h5v1zm-21-1v6h11v-11h-6c-2.761 0-5 2.239-5 5zm6.914-1.622l.708.708-1.415 1.414 1.414 1.414-.707.707-1.414-1.414-1.414 1.414-.708-.707 1.414-1.414-1.414-1.414.707-.707 1.415 1.414 1.414-1.415z"/></svg>
+              <strong>FreeFire Tournament Calculator</strong>
+            </a>
+            <button class="navbar-toggler" style="margin-right: 100px" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+    </header>
+  
+    <div class="container">
+        <img src="logo.png" width="100%" height="150px" style="object-fit: cover;">
+        <p class="text-center"><i>Gak ada yang salah bermain solo squad, yang salah main squad tapi mati solo.</i> <br/><span class="text-left"> - Pro Player Indonesia</span></p>
         <hr>
-        <div id='new-team'></div>
-    </div>
-    <button type="button" class="btn btn-info" id="add-team">Tambah tim</button>
-    <button type="button" class="btn btn-primary" id="calculate">Hitung dan dapatkan peringkat</button>
-    <br/><br/>
-    <button type="button" class="btn btn-danger" id="clear-storage-btn">Hapus semua data</button>
-    <h4 id="header-scoreboard" style="display: none">Juara:</h4>
-    <ol id="scoreboard">
+        <div class="teams">
+            <div class="tim1-container">
+                <div class="form-group">
+                    <label for="tim1-name">Masukkan Nama Tim1</label>
+                    <input type="text" class="form-control" id="tim1-name">
+                </div>
+                <div class="form-group">
+                    <label for="tim1-score">Masukkan poin Tim1, dipisah koma (misalnya: 10,2,3)</label>
+                    <input type="text" class="form-control score-field" name=""  id="tim1-score">
+                </div>
+            </div>
+            <hr>
+            <div id='new-team'></div>
+        </div>
+        <button type="button" class="btn btn-info" id="add-team">Tambah tim</button>
+        <button type="button" class="btn btn-primary" id="calculate">Hitung dan dapatkan peringkat</button>
+        <br/><br/>
+        <button type="button" class="btn btn-danger" id="clear-storage-btn">Hapus semua data</button>
+        <h4 id="header-scoreboard" style="display: none">Juara:</h4>
+        <ol id="scoreboard">
 
-    </ol>
-    <div class="float-info" style='max-height: 350px'>
-        <p>Nilai peringkat ke poin</p>
-        <ul style='overflow: hidden'>
-            <li>Peringkat 1: 12 Poin</li>
-            <li>Peringkat 2: 9 Poin</li>
-            <li>Peringkat 3: 8 Poin</li>
-            <li>Peringkat 4: 7 Poin</li>
-            <li>Peringkat 5: 6 Poin</li>
-            <li>Peringkat 6: 5 Poin</li>
-            <li>Peringkat 7: 4 Poin</li>
-            <li>Peringkat 8: 3 Poin</li>
-            <li>Peringkat 9: 2 Poin</li>
-            <li>Peringkat 10: 1 Poin</li>
-            <li>Peringkat 11: 0 Poin</li>
-            <li>Peringkat 12: 0 Poin</li>
-            <br>
-        </ul>
-        <button class="btn btn-warning" id="toggle-float">Tutup/Buka</button>
+        </ol>
+        <div class="float-info" style='max-height: 0px'>
+            <p>Nilai peringkat ke poin</p>
+            <ul style='overflow: hidden; max-height: 0px;'>
+                <li>Peringkat 1: 12 Poin</li>
+                <li>Peringkat 2: 9 Poin</li>
+                <li>Peringkat 3: 8 Poin</li>
+                <li>Peringkat 4: 7 Poin</li>
+                <li>Peringkat 5: 6 Poin</li>
+                <li>Peringkat 6: 5 Poin</li>
+                <li>Peringkat 7: 4 Poin</li>
+                <li>Peringkat 8: 3 Poin</li>
+                <li>Peringkat 9: 2 Poin</li>
+                <li>Peringkat 10: 1 Poin</li>
+                <li>Peringkat 11: 0 Poin</li>
+                <li>Peringkat 12: 0 Poin</li>
+                <br>
+            </ul>
+            <button class="btn btn-warning" id="toggle-float">Tutup/Buka</button>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 <script>
     let totalTeam = 1;
