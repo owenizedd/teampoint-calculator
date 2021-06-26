@@ -46,10 +46,9 @@
         <div id='new-team'></div>
     </div>
     <button type="button" class="btn btn-info" id="add-team">Tambah tim</button>
-    <button type="button" class="btn btn-info" id="clear-storage-btn">Tambah tim</button>
-
-
     <button type="button" class="btn btn-primary" id="calculate">Hitung dan dapatkan peringkat</button>
+    <br/><br/>
+    <button type="button" class="btn btn-danger" id="clear-storage-btn">Hapus semua data</button>
     <h4 id="header-scoreboard" style="display: none">Juara:</h4>
     <ol id="scoreboard">
 
@@ -112,7 +111,11 @@
     }
 
     document.querySelector('#clear-storage-btn').onclick = function () {
-        localStorage.clear();
+        
+        if (window.confirm("Apakah yakin menghapus data?")){
+            localStorage.clear();
+            window.location.reload();
+        }
     }
 
     let data = []
