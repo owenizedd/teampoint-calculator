@@ -75,14 +75,24 @@
 </body>
 <script>
     let totalTeam = 1;
-    document.querySelector('#add-team').onclick = function(){
+    function addTeam(){
         ++totalTeam;
+        console.log('adding');
         let teamHTML =document.querySelector('.tim1-container').innerHTML;
         teamHTML = teamHTML.replaceAll('tim1', 'tim' + totalTeam);
         teamHTML = teamHTML.replaceAll('Tim1', 'Tim' + totalTeam);
         document.querySelector('#new-team').outerHTML = teamHTML + '<hr><div id="new-team"></div>';
         saveDataToStorage();
     }
+    function addTeamNoStorage(){
+        ++totalTeam;
+        console.log('adding');
+        let teamHTML =document.querySelector('.tim1-container').innerHTML;
+        teamHTML = teamHTML.replaceAll('tim1', 'tim' + totalTeam);
+        teamHTML = teamHTML.replaceAll('Tim1', 'Tim' + totalTeam);
+        document.querySelector('#new-team').outerHTML = teamHTML + '<hr><div id="new-team"></div>';
+    }
+    document.querySelector('#add-team').onclick = addTeam;
     document.querySelector('#calculate').onclick = function(){
         let data = [];
         Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput) => {
@@ -119,19 +129,6 @@
     }
 
     let data = []
-    function loadDataFromStorage(){
-        const scores = JSON.parse(localStorage.getItem('scores'));
-        if (Array.isArray(scores)){
-            data = scores;
-            for(let i = 0; i< scores.length - 1; i++){
-                document.querySelector('#add-team').click();
-            }
-            Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput, index) => {
-                scoreInput.value = scores[index].sum;
-                let name = document.querySelector('#' + scoreInput.id.replace('score','name')).value = scores[index].name;
-            })
-        }
-    }
     function saveDataToStorage(){
         let length = Array.from(document.querySelectorAll('.score-field')).length;
         data.length = length;
@@ -144,7 +141,22 @@
             }
         })
     }
-    this.saveDataToStorage();
+    function loadDataFromStorage(){
+        const scores = JSON.parse(localStorage.getItem('scores'));
+        if (Array.isArray(scores)){
+            data = scores;
+            for(let i = 0; i< scores.length - 1; i++){
+                addTeamNoStorage();
+            }
+            console.log(Array.from(document.querySelectorAll('.score-field')).length)
+            Array.from(document.querySelectorAll('.score-field')).forEach( (scoreInput, index) => {
+                scoreInput.value = scores[index].sum;
+                let name = document.querySelector('#' + scoreInput.id.replace('score','name')).value = scores[index].name;
+            })
+        }
+    }
+    
     this.loadDataFromStorage();
+    this.saveDataToStorage();
 </script>
 </html>
